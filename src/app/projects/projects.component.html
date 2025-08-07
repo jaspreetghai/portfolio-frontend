@@ -1,0 +1,38 @@
+<section class="container mx-auto p-6">
+  <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">
+    My Projects
+  </h2>
+
+  <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    @if (projects(); as projectsList) { @for (project of projectsList; track
+    project._id) {
+    <div
+      class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+    >
+      <h3 class="text-2xl font-semibold text-gray-800 mb-2">
+        {{ project.title }}
+      </h3>
+      <p class="text-gray-600 mb-4">{{ project.details }}</p>
+      <div class="flex flex-wrap gap-2 mb-4">
+        @for (tech of project.techStack; track $index) {
+        <span
+          class="bg-gray-200 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full"
+        >
+          {{ tech }}
+        </span>
+        }
+      </div>
+      <a
+        [routerLink]="['/projects', project._id]"
+        class="text-blue-600 hover:underline"
+      >
+        View Details
+      </a>
+    </div>
+    } @empty {
+    <p>No projects to display.</p>
+    } } @else {
+    <p>Loading projects...</p>
+    }
+  </div>
+</section>
